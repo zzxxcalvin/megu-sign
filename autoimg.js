@@ -21,11 +21,12 @@ var ip;
 
 
 let makeImg = (req)=>{
-    let svg_img =
+    let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress ;
+    let svg_img = 
     `
-        <svg viewBox ="0 0 660 125">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 660 125" style="enable-background:new 0 0 660 125;" xml:space="preserve">
             <g>
-                <text transform="matrix(1 0 0 1 148 37.8271)" font-size="12px" >你的 IP 是${req.connection.remoteAddress}</text>
+                <text transform="matrix(1 0 0 1 148 37.8271)" font-size="12px" >你的 IP 是${ip}</text>
                 <text transform="matrix(1 0 0 1 148 69.9877)" font-size="12px">這是偉大魔法的測試</text>
                 <text transform="matrix(1 0 0 1 148 103.7304)" font-size="12px">希望我會做完</text>
             </g>
@@ -51,6 +52,7 @@ app.get('/ip',(req,res)=>{
 
 app.get('/img',(req,res)=>{
     let img = makeImg(req);
+    res.setHeader('content-type', 'image/svg+xml')
     res.send(img);
 });
 
