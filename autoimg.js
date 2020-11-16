@@ -2,9 +2,7 @@
 const fs = require("fs");
 const express = require("express");
 const app = express();
-
 const img = require('./image.js');
-
 const port = process.env.PORT || 3000;
 
 var ip;
@@ -22,13 +20,16 @@ var ip;
 
 let makeImg = (req)=>{
     let ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress ;
+    // 因為express的 req 會拿到的大多時候ipv4 map to ipv6 的格式 , 會長成::ffff:192.168.0.1 之類的樣子
+    // 所以將前面的::ffff:使用 regex '/^.*:/' 替換成空字串
+    ip = ip.replace(/^.*:/,'');
     let svg_img = 
     `
         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 660 125" style="enable-background:new 0 0 660 125;" xml:space="preserve">
             <g>
-                <text transform="matrix(1 0 0 1 148 37.8271)" font-size="12px" >你的 IP 是${ip}</text>
-                <text transform="matrix(1 0 0 1 148 69.9877)" font-size="12px">這是偉大魔法的測試</text>
-                <text transform="matrix(1 0 0 1 148 103.7304)" font-size="12px">希望我會做完</text>
+                <text transform="matrix(1 0 0 1 148 37.8271)" font-size="22px" font-family="Microsoft JhengHei" fill="#EA0000">你的 IP 是${ip}</text>
+                <text transform="matrix(1 0 0 1 148 69.9877)" font-size="22px" font-family="Microsoft JhengHei" fill="#EA0000">這是偉大魔法的測試</text>
+                <text transform="matrix(1 0 0 1 148 103.7304)" font-size="22px" font-family="Microsoft JhengHei" fill="#EA0000">希望我會做完</text>
             </g>
         </svg>
     `;
