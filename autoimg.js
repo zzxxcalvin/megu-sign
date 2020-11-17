@@ -31,9 +31,11 @@ let getDevice = (ua)=>{
         browser = "Chrome";
     } else if (ua.indexOf("Firefox") != -1) {
         browser = "Firefox";
+    } else if (ua.indexOf("Safari") != -1 && ua.indexOf("CriOS") != -1 && ua.indexOf("Mobile") != -1){
+        browser = "Chrome";
     } else if (ua.indexOf("Safari") != -1) {
         browser = "Safari";
-    }
+    } 
     
     if(ua.indexOf("Windows") != -1){
         //Windows 系列
@@ -53,6 +55,12 @@ let getDevice = (ua)=>{
     } else if( ua.indexOf("Mac OS") != -1 ){
         // Mac
         device = "Mac";
+    } else if( ua.indexOf("android") != -1 ){
+        // Mac
+        device = "Android";
+    } else if( ua.indexOf("Ubuntu") != -1 ){
+        // Mac
+        device = "Ubuntu";
     }
 
     return {browser,device};
