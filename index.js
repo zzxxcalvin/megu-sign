@@ -5,14 +5,14 @@ const express = require("express");
 const app = express();
 const port = process.env.PORT || 3000;
 var makeImg = require("./image.js");
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
 
-let uri = "mongodb://127.0.0.1/megu_database"
+// let uri = "mongodb://127.0.0.1/megu_database"
 // mongoose.connect(uri,{ useNewUrlParser: true });
-mongoose.connect(uri, { useNewUrlParser: true,useUnifiedTopology: true });
+// mongoose.connect(uri, { useNewUrlParser: true,useUnifiedTopology: true });
 
 
-app.use(express.static(__dirname + '/static'));
+// app.use(express.static(__dirname + '/static'));
 // 測試 static 檔案用
 
 app.get('/',(req,res)=>{
